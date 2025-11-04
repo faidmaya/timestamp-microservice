@@ -1,58 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Timestamp Microservice</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-gradient-to-br from-teal-50 to-blue-50 min-h-screen flex items-center justify-center">
-    <div class="bg-white shadow-lg rounded-2xl p-8 max-w-lg w-full">
-      <h1 class="text-2xl font-semibold text-center text-teal-600 mb-4">
-        🕓 Timestamp Microservice
-      </h1>
-      <p class="text-gray-600 text-center mb-6">
-        Masukkan tanggal (misalnya <code>2015-12-25</code> atau <code>1451001600000</code>),
-        atau biarkan kosong untuk menampilkan waktu sekarang.
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timestamp Microservice</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-800 font-sans p-6">
+
+  <div class="bg-white shadow-xl rounded-2xl p-10 max-w-lg text-center border border-indigo-100">
+    <h1 class="text-3xl font-bold text-indigo-600 mb-4">⏱️ Timestamp Microservice</h1>
+    <p class="text-gray-600 mb-6">
+      Welcome to the <span class="font-semibold">Timestamp Microservice</span>!  
+      You can use the following endpoints to test the API:
+    </p>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-left text-sm font-mono text-gray-700 space-y-2">
+      <p>
+        <a href="/api/" class="text-indigo-500 hover:text-indigo-700 hover:underline">
+          /api/
+        </a>
+        → current time
       </p>
-
-      <div class="flex gap-2">
-        <input
-          id="dateInput"
-          type="text"
-          placeholder="Contoh: 2025-11-03 atau kosongkan"
-          class="border border-gray-300 rounded-lg p-3 flex-grow focus:outline-none focus:ring-2 focus:ring-teal-400"
-        />
-        <button
-          id="checkBtn"
-          class="bg-teal-400 hover:bg-teal-500 text-white font-medium px-4 py-2 rounded-lg transition"
-        >
-          Cek
-        </button>
-      </div>
-
-      <div id="result" class="mt-6 text-center text-gray-700"></div>
+      <p>
+        <a href="/api/2015-12-25" class="text-indigo-500 hover:text-indigo-700 hover:underline">
+          /api/2015-12-25
+        </a>
+        → specific date
+      </p>
+      <p>
+        <a href="/api/1451001600000" class="text-indigo-500 hover:text-indigo-700 hover:underline">
+          /api/1451001600000
+        </a>
+        → unix timestamp
+      </p>
     </div>
+    
 
-    <script>
-      const btn = document.getElementById("checkBtn");
-      const input = document.getElementById("dateInput");
-      const resultDiv = document.getElementById("result");
+    <footer class="mt-8 text-xs text-gray-500">
+      Built for 
+      <a href="https://www.freecodecamp.org" target="_blank" class="text-indigo-500 hover:underline">
+        FreeCodeCamp
+      </a>
+    </footer>
+  </div>
 
-      btn.addEventListener("click", async () => {
-        const value = input.value.trim();
-        const url = value ? `/api/${value}` : `/api`;
-
-        const res = await fetch(url);
-        const data = await res.json();
-
-        resultDiv.innerHTML = `
-          <div class="mt-4 p-4 border rounded-lg bg-gray-50">
-            <p><strong>Unix:</strong> ${data.unix ?? "—"}</p>
-            <p><strong>UTC:</strong> ${data.utc ?? data.error}</p>
-          </div>
-        `;
-      });
-    </script>
-  </body>
+</body>
 </html>
+
